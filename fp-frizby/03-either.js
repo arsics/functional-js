@@ -17,11 +17,17 @@ console.log(`resultLeft: ${resultLeft}`);
 
 // ---
 
-const findColor = name =>
-    ({red: '#ff4444', blue: '#3b5998', yellow: '#fff68f'})[name];
+const findColor = name => {
+    const found = ({red: '#ff4444', blue: '#3b5998', yellow: '#fff68f'})[name];
+    return found ? Right(found) : Left(null);
+};
 
-const resultRed = findColor('red').slice(1).toUpperCase();
+const resultRed = findColor('red')
+                    .map(s => s.slice(1))
+                    .fold(e => 'no color', s => s.toUpperCase());
 console.log(`Result for 'red': ${resultRed}`);
 
-const resultGreen = findColor('green').slice(1).toUpperCase(); // throws
-console.log(`Result for 'green': ${resultGreen}`);
+const resultGreen = findColor('green')
+                    .map(s => s.slice(1))
+                    .fold(e => 'no color', s => s.toUpperCase());
+console.log(`Result for 'green': ${resultGreen}`); // throws
