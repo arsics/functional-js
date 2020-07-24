@@ -17,10 +17,11 @@ console.log(`resultLeft: ${resultLeft}`);
 
 // ---
 
-const findColor = name => {
-    const found = ({red: '#ff4444', blue: '#3b5998', yellow: '#fff68f'})[name];
-    return found ? Right(found) : Left(null);
-};
+const fromNullable = x =>
+    x != null ? Right(x) : Left(null);
+
+const findColor = name =>
+    fromNullable(({red: '#ff4444', blue: '#3b5998', yellow: '#fff68f'})[name]);
 
 const resultRed = findColor('red')
                     .map(s => s.slice(1))
