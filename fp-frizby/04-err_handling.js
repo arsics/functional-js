@@ -11,14 +11,21 @@ const Left = x => ({
 
 const fs = require('fs');
 
-const getPort = () => {
-    try {
-        const config = JSON.parse(fs.readFileSync('config.json'));
-        return config.port;
-    } catch (err) {
-        return 3000;
-    }
-};
+// Use chain for composable error handling with nested Eithers
 
-const result = getPort();
+const tryCatch = f => {
+    try {
+        return Right(f());
+    } catch(e) {
+        return Left(e);
+    }
+}
+
+const result = tryCatch(() => fs.readFileSync('config.json'))
+    .map(c => JSON.parse(c))
+    .fold(err => 3000, config => config.port);
+
 console.log(result);
+// PROBLEM: the file read is covered but if JSON.parse fails we still get an exception!
+// Also, if we use '.map(c => tryCatch(() => JSON.parse(c)))' as a solution
+// we have double boxing and need two fold operations, which is confusing
