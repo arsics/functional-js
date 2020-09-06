@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && node dist/01-eq.js",
+    "start": "tsc && node dist/02-ord.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
