@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && node dist/03-semigroup.js",
+    "start": "tsc && node dist/04-monoid.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
